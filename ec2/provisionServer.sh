@@ -14,7 +14,7 @@ sudo yum install -y git.x86_64 mongodb-org-server mongodb-org-shell mongodb-org-
 sudo service mongod start
 
 # install node
-https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
+curl https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install 8.1.4
 npm install -g forever
