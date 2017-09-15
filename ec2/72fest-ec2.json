@@ -1,0 +1,25 @@
+{
+    "Description": "72Fest Infrastructure",
+    "Resources": {
+        "NodeServer": {
+            "Type" : "AWS::EC2::Instance",
+            "Properties" : {
+                "AvailabilityZone": "us-east-1a",
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName" : "/dev/xvda",
+                        "Ebs" : {
+                            "VolumeSize" : "8"
+                        }
+                    }
+                ],
+                "IamInstanceProfile": "72fest-ec2-role",
+                "ImageId" : "ami-4fffc834",
+                "InstanceType": "t2.micro",
+                "KeyName": "lgomes-72fest-aws-key",
+                "SecurityGroups": ["72fest-security-group"],
+                "UserData": "IyBzZXQgdXAgZmlyZXdhbGwKc3VkbyBpcHRhYmxlcyAtdCBuYXQgLUEgUFJFUk9VVElORyAtcCB0Y3AgLS1kcG9ydCA4MCAtaiBSRURJUkVDVCAtLXRvLXBvcnRzIDMwMDAKCiMgaW5zdGFsbCBtb25nbwplY2hvICJbbW9uZ29kYi1vcmctMy4yXQpuYW1lPU1vbmdvREIgUmVwb3NpdG9yeQpiYXNldXJsPWh0dHBzOi8vcmVwby5tb25nb2RiLm9yZy95dW0vYW1hem9uLzIwMTMuMDMvbW9uZ29kYi1vcmcvMy4yL3g4Nl82NC8KZ3BnY2hlY2s9MQplbmFibGVkPTEKZ3Bna2V5PWh0dHBzOi8vd3d3Lm1vbmdvZGIub3JnL3N0YXRpYy9wZ3Avc2VydmVyLTMuMi5hc2MiIHwKc3VkbyB0ZWUgLWEgL2V0Yy95dW0ucmVwb3MuZC9tb25nb2RiLW9yZy0zLjIucmVwbwpzdWRvIHl1bSB1cGRhdGUgLXkKc3VkbyB5dW0gaW5zdGFsbCAteSBnaXQueDg2XzY0IG1vbmdvZGItb3JnLXNlcnZlciBtb25nb2RiLW9yZy1zaGVsbCBtb25nb2RiLW9yZy10b29scwpzdWRvIHNlcnZpY2UgbW9uZ29kIHN0YXJ0CgojIGluc3RhbGwgbm9kZQpjdXJsIGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9jcmVhdGlvbml4L252bS92MC4zMi4wL2luc3RhbGwuc2ggfCBiYXNoCi4gfi8ubnZtL252bS5zaApudm0gaW5zdGFsbCA4LjEuNApucG0gaW5zdGFsbCAtZyBmb3JldmVyCgojIHByb3Zpc2lvbiBzZXJ2aWNlCm1rZGlyIGNvZGUgJiYgY2QgY29kZQpnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tLzcyRmVzdC83MkZlc3RXZWJBcHAuZ2l0CmNkIDcyRmVzdFdlYkFwcC9zZXJ2ZXIvCm5wbSBpbnN0YWxsCmF3cyBzMyBjcCBzMzovLzcyZmVzdC1jb25maWdzL3NlcnZlci9jb25maWcuanNvbiBjb25maWcuanNvbgpmb3JldmVyIHN0YXJ0IGZvcmV2ZXIuanNvbgo="
+            }
+        }
+    }
+}
