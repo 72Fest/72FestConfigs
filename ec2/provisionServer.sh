@@ -1,4 +1,5 @@
 # set up firewall
+#!/bin/bash
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
 
 # install mongo
@@ -10,7 +11,7 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc" |
 sudo tee -a /etc/yum.repos.d/mongodb-org-3.2.repo
 sudo yum update -y
-sudo yum install -y git.x86_64 mongodb-org-server mongodb-org-shell mongodb-org-tools
+sudo yum install -y git.x86_64 ImageMagick.x86_64 mongodb-org-server mongodb-org-shell mongodb-org-tools
 sudo service mongod start
 
 # install node
