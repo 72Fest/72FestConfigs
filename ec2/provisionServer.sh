@@ -18,12 +18,20 @@ sudo service mongod start
 curl https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install 8.1.4
-npm install -g forever
+npm install -g pm2
 
-# provision service
+# provision services
 mkdir code && cd code
 git clone https://github.com/72Fest/72FestWebApp.git
 cd 72FestWebApp/server/
 npm install
 aws s3 cp s3://72fest-configs/server/config.json config.json
-forever start forever.json
+pm2 start app.config.json
+
+
+cd /home/ec2-user/code
+git clone https://github.com/72Fest/72Server.git
+cd 72Server
+aws s3 cp s3://72fest-configs/server/config.json config.json
+npm install
+pm2 start app.config.json
