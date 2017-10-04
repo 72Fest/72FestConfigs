@@ -14,6 +14,12 @@ sudo yum update -y
 sudo yum install -y gcc64-c++.x86_64 gcc48.x86_64 git.x86_64 ImageMagick.x86_64 mongodb-org-server mongodb-org-shell mongodb-org-tools
 sudo service mongod start
 
+# import mongo data
+mkdir ~/db/ && cd ~/db/
+aws s3 cp s3://72fest-backups/prod/mongo/2017/latest-72fest-backup.zip .
+unzip latest-72fest-backup.zip
+mongorestore --db 72Fest backup/72Fest/
+
 # install node
 curl https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
 . ~/.nvm/nvm.sh
