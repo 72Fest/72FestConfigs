@@ -11,7 +11,7 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc" |
 sudo tee -a /etc/yum.repos.d/mongodb-org-3.2.repo
 sudo yum update -y
-sudo yum install -y git.x86_64 ImageMagick.x86_64 mongodb-org-server mongodb-org-shell mongodb-org-tools
+sudo yum install -y gcc64-c++.x86_64 gcc48.x86_64 git.x86_64 ImageMagick.x86_64 mongodb-org-server mongodb-org-shell mongodb-org-tools
 sudo service mongod start
 
 # install node
@@ -21,12 +21,12 @@ nvm install 8.1.4
 npm install -g pm2
 
 # provision services
-mkdir code && cd code
+mkdir ~/code && cd ~/code
 git clone https://github.com/72Fest/72FestWebApp.git
-cd 72FestWebApp/server/
+cd ~/code/72FestWebApp/server/
 npm install
 aws s3 cp s3://72fest-configs/server/config.json config.json
-pm2 start app.config.json
+pm2 start app.config.js
 
 
 cd /home/ec2-user/code
@@ -34,4 +34,8 @@ git clone https://github.com/72Fest/72Server.git
 cd 72Server
 aws s3 cp s3://72fest-configs/server/config.json config.json
 npm install
-pm2 start app.config.json
+pm2 start app.config.js
+
+# set up backup cronjob
+echo
+(crontab -l 2>/dev/null; echo "bash /home/ec2-user/code/72FestWebApp/scripts/backupMongo.sh > /dev/null") | crontab -
