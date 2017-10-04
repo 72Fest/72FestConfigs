@@ -15,27 +15,27 @@ sudo yum install -y gcc64-c++.x86_64 gcc48.x86_64 git.x86_64 ImageMagick.x86_64 
 sudo service mongod start
 
 # import mongo data
-mkdir ~/db/ && cd ~/db/
+mkdir ~ec2-user/db/ && cd ~ec2-user/db/
 aws s3 cp s3://72fest-backups/prod/mongo/2017/latest-72fest-backup.zip .
 unzip latest-72fest-backup.zip
 mongorestore --db 72Fest backup/72Fest/
 
 # install node
 curl https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
-. ~/.nvm/nvm.sh
+. ~ec2-user/.nvm/nvm.sh
 nvm install 8.1.4
 npm install -g pm2
 
 # provision services
-mkdir ~/code && cd ~/code
+mkdir ~ec2-user/code && cd ~ec2-user/code
 git clone https://github.com/72Fest/72FestWebApp.git
-cd ~/code/72FestWebApp/server/
+cd ~ec2-user/code/72FestWebApp/server/
 npm install
 aws s3 cp s3://72fest-configs/server/config.json config.json
 pm2 start app.config.js
 
 
-cd /home/ec2-user/code
+cd ~ec2-user/code
 git clone https://github.com/72Fest/72Server.git
 cd 72Server
 aws s3 cp s3://72fest-configs/server/config.json config.json
