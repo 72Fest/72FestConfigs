@@ -27,7 +27,7 @@ nvm install 8.1.4
 npm install -g pm2
 
 # provision services
-mkdir ~ec2-user/code && cd ~ec2-user/code
+mkdir -p ~ec2-user/code && cd ~ec2-user/code
 git clone https://github.com/72Fest/72FestWebApp.git
 cd ~ec2-user/code/72FestWebApp/server/
 npm install
@@ -43,5 +43,4 @@ npm install
 pm2 start app.config.js
 
 # set up backup cronjob
-echo
-(crontab -l 2>/dev/null; echo "bash /home/ec2-user/code/72FestWebApp/scripts/backupMongo.sh > /dev/null") | crontab -
+(crontab -l 2>/dev/null; echo "*/3 * * * * bash /home/ec2-user/code/72FestWebApp/scripts/backupMongo.sh > /dev/null") | crontab -
