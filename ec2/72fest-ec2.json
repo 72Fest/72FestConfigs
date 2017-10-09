@@ -1,7 +1,47 @@
 {
     "Description": "72Fest Infrastructure",
     "Resources": {
-        "NodeServer": {
+        "72FestSecurityGroupEC2": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName": "72fest-sg-ec2",
+                "GroupDescription": "72Fest security gropup for EC2 instances",
+
+                "SecurityGroupIngress" : [
+                    {
+                        "IpProtocol" : "tcp",
+                        "FromPort" : "22",
+                        "ToPort" : "22",
+                        "CidrIp" : "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol" : "tcp",
+                        "FromPort" : "80",
+                        "ToPort" : "80",
+                        "CidrIp" : "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol" : "tcp",
+                        "FromPort" : "443",
+                        "ToPort" : "443",
+                        "CidrIp" : "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol" : "tcp",
+                        "FromPort" : "3000",
+                        "ToPort" : "3000",
+                        "CidrIp" : "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol" : "tcp",
+                        "FromPort" : "5000",
+                        "ToPort" : "5000",
+                        "CidrIp" : "0.0.0.0/0"
+                    }
+                ]
+            }
+        },
+        "72FestEC2Instance": {
             "Type" : "AWS::EC2::Instance",
             "Properties" : {
                 "AvailabilityZone": "us-east-1a",
@@ -17,7 +57,7 @@
                 "ImageId" : "ami-4fffc834",
                 "InstanceType": "t2.micro",
                 "KeyName": "lgomes-72fest-aws-key",
-                "SecurityGroups": ["72fest-security-group"],
+                "SecurityGroups": [ {"Ref": "72FestSecurityGroupEC2"} ],
                 "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [
                     "#!/bin/bash", "\n",
                     "sudo su - ec2-user -c 'curl https://raw.githubusercontent.com/72Fest/72FestConfigs/master/ec2/provisionServer.sh | bash'", "\n"
