@@ -14,6 +14,9 @@ sudo yum update -y
 sudo yum install -y gcc64-c++.x86_64 gcc48.x86_64 git.x86_64 ImageMagick.x86_64 mongodb-org-server mongodb-org-shell mongodb-org-tools
 sudo service mongod start
 
+# set timezone
+sudo cp /usr/share/zoneinfo/America/New_York /etc/localtime
+
 # import mongo data
 mkdir ~ec2-user/db/ && cd ~ec2-user/db/
 aws s3 cp s3://72fest-backups/prod/mongo/2017/latest-72fest-backup.zip .
