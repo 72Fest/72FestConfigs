@@ -54,7 +54,7 @@
                     }
                 ],
                 "IamInstanceProfile": "72fest-ec2-role",
-                "ImageId" : "ami-4fffc834",
+                "ImageId" : "ami-04681a1dbd79675a5",
                 "InstanceType": "t2.micro",
                 "KeyName": "lgomes-72fest-aws-key",
                 "SecurityGroups": [ {"Ref": "72FestSecurityGroupEC2"} ],
